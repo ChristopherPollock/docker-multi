@@ -1,0 +1,29 @@
+sudo:requird
+
+#tell traveis what component we need to use
+services:
+  - docker
+
+#tell travis ot use docker to build our test services
+before_install:
+  - docker build -t manicman/react-test -f ./client/Dockerfile.dev ./client/Dockerfile.dev
+
+#tell travis to run the newly created test image and run the tests
+script:
+  - docker run  -e CI=true manicman/react-test npm test
+
+#if successful, then go ahed and build the production version of everything
+after_success:
+  - docker build -t manicman/multi-client ./client
+  - docker build -t manicman/multi-nginx ./nginx
+  - docker build -t manicman/multi-server ./server
+  - docker build -t manicman/multi-worker ./worker
+
+#log in to the docker CLI
+#going to set up some encrypted username and password info so we don't store secret info here
+ - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+#take these images to docker hub
+  - docker push manicman/multi-client 
+  - docker push manicman/multi-nginx
+  - docker push manicman/multi-server
+  - docker push manicman/multi-worker
