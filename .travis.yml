@@ -6,7 +6,7 @@ services:
 
 #tell travis ot use docker to build our test services
 before_install:
-  - docker build -t manicman/react-test -f ./client/Dockerfile.dev ./client/Dockerfile.dev
+  - docker build -t manicman/react-test -f ./client/Dockerfile.dev ./client
 
 #tell travis to run the newly created test image and run the tests
 script:
