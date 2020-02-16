@@ -10,7 +10,7 @@ before_install:
 
 #tell travis to run the newly created test image and run the tests
 script:
-  - docker run  -e CI=true manicman/react-test npm test
+  - docker run -e CI=true manicman/react-test npm test
 
 #if successful, then go ahed and build the production version of everything
 after_success:
