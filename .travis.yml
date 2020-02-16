@@ -21,7 +21,7 @@ after_success:
 
 #log in to the docker CLI
 #going to set up some encrypted username and password info so we don't store secret info here
- - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 #take these images to docker hub
   - docker push manicman/multi-client 
   - docker push manicman/multi-nginx
