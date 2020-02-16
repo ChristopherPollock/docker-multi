@@ -1,4 +1,4 @@
-sudo:requird
+sudo: requird
 
 #tell traveis what component we need to use
 services:
