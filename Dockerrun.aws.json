@@ -1,0 +1,30 @@
+{
+    "AWSEDDockerrunVersion": 2,
+    "COntainerDefinitions": [
+        {
+            "name": "client",
+            "image": "manicman/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "manicman/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "manicman/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "manicman/multi-nginx",
+            "hostname": "nginx",
+            "essential":true
+        }
+
+    ]
+}
