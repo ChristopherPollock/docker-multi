@@ -1,5 +1,5 @@
 {
-    "AWSEDDockerrunVersion": 2,
+    "AWSEBDockerrunVersion": 2,
     "COntainerDefinitions": [
         {
             "name": "client",
@@ -23,7 +23,14 @@
             "name": "nginx",
             "image": "manicman/multi-nginx",
             "hostname": "nginx",
-            "essential":true
+            "essential":true,
+            "portMappings": [
+                {
+                    "hostport": 80,
+                    "containerport": 80
+                }
+            ],
+            "links": ["client", "server"]
         }
 
     ]
