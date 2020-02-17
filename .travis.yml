@@ -30,8 +30,8 @@ after_success:
 
 #Now we ask travis to tell EB that the new images are available to it can roll this out in production.
 deploy:
-  Provider: elacticbeanstalk
-  Region: us-east-1
+  provider: elacticbeanstalk
+  region: us-east-1
   app: multi-docker
   env: MultiDocker-env
   bucket-name: elasticbeanstalk-us-east-1-777108062635
