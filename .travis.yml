@@ -30,7 +30,8 @@ after_success:
 
 #Now we ask travis to tell EB that the new images are available to it can roll this out in production.
 deploy:
-  provider: elacticbeanstalk
+  edge: true
+  provider: elasticbeanstalk
   region: us-east-1
   app: multi-docker
   env: MultiDocker-env
@@ -39,5 +40,4 @@ deploy:
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: $AWS_SECRET_KEY
+  secret_access_key: $AWS_SECRET_KEY

@@ -20,7 +20,7 @@
             "image": "manicman/multi-worker",
             "hostname": "worker",
             "essential": false,
-            
+            "memory": 128
         },
         {
             "name": "nginx",
