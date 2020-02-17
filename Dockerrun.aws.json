@@ -30,7 +30,7 @@
             "portMappings": [
                 {
                     "hostport": 80,
-                    "containerport": 80
+                    "containerPort": 80
                 }
             ],
             "links": ["client", "server"],
