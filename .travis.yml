@@ -8,7 +8,7 @@ before_install:
   - docker build -t manicman/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true USERNAME/react-test npm test
+  - docker run -e CI=true manicman/react-test npm test
 
 after_success:
   - docker build -t manicman/multi-client ./client
