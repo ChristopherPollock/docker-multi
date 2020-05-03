@@ -1,42 +1,35 @@
 sudo: required
+language: generic
 
-#tell traveis what component we need to use
 services:
   - docker
 
-#tell travis ot use docker to build our test services
 before_install:
   - docker build -t manicman/react-test -f ./client/Dockerfile.dev ./client
 
-#tell travis to run the newly created test image and run the tests
 script:
-  - docker run -e CI=true manicman/react-test npm test
+  - docker run manicman/react-test npm test -- --coverage
 
-#if successful, then go ahed and build the production version of everything
 after_success:
   - docker build -t manicman/multi-client ./client
   - docker build -t manicman/multi-nginx ./nginx
   - docker build -t manicman/multi-server ./server
   - docker build -t manicman/multi-worker ./worker
-
-#log in to the docker CLI
-#going to set up some encrypted username and password info so we don't store secret info here
+  # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-#take these images to docker hub
+  # Take those images and push them to docker hub
   - docker push manicman/multi-client
   - docker push manicman/multi-nginx
   - docker push manicman/multi-server
   - docker push manicman/multi-worker
 
-#Now we ask travis to tell EB that the new images are available to it can roll this out in production.
 deploy:
-  edge: true
   provider: elasticbeanstalk
-  region: us-east-1
+  region: us-west-1
   app: multi-docker
   env: MultiDocker-env
-  bucket-name: elasticbeanstalk-us-east-1-777108062635
-  backet_path: multi-docker
+  bucket_name: elasticbeanstalk-us-west-1-306476627547
+  bucket_path: docker-multi
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
