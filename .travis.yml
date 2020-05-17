@@ -23,6 +23,7 @@ after_success:
   - docker push manicman/multi-server
   - docker push manicman/multi-worker
 
+
 deploy:
   provider: elasticbeanstalk
   region: us-east-1
